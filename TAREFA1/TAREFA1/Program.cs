@@ -53,7 +53,6 @@ namespace TAREFA1
             
             string linha;
             string cabeçalho = buffer.ReadLine();
-            int nCols = cabeçalho.Split(SEPARADOR).Length;
 
             List<string> cidade = new List<string>();
             List<int> população = new List<int>();
