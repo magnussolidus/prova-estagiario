@@ -78,7 +78,7 @@ namespace TAREFA1
 
             // escrita dos dados
             
-            StreamWriter escritor = new StreamWriter(CAMINHO + "tarefa1.csv", false, Encoding.UTF8);
+            StreamWriter escritor = new StreamWriter(CAMINHO + "tarefa1.csv", false, Encoding.Default);
             escritor.WriteLine(cabeçalho);
 
             for(int i=0; i<cidade.Count; i++)

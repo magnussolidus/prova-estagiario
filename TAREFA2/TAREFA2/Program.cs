@@ -19,6 +19,7 @@ namespace TAREFA2
         const string ARQUIVO = "mapa.csv";
         const string CAMINHO = "..\\..\\..\\..\\";
         const char SEPARADOR = ';';
+        const string RESULTADO = "tarefa2.csv";
 
         private static string _cabeçalho;
 
@@ -92,28 +93,38 @@ namespace TAREFA2
         {
             // processamento dos dados
             int tamanho = alvo.Length;
-            int aux;
-            bool trocar;
+            Censo aux;
+            bool trocar = true;
+            int prox;
+            int count = 0;
 
-            for(int i=1; i<=tamanho-1; i++) // 
+            for(int i=1; (i<=tamanho-1) && trocar; i++) // 
             {
                 trocar = false;
-                for(int j=0; j<=tamanho -1; j++)
+                for(int j=0; j<tamanho-1; j++)
                 {
-
+                    prox = j+1;
+                    if(alvo[j].população > alvo[prox].população)
+                    {
+                        ++count;
+                        aux = alvo[prox];
+                        alvo[prox] = alvo[j];
+                        alvo[j] = aux;
+                        trocar = true;
+                    }
                 }
-
             }
-
-
+            
             // escrita dos dados
 
-            StreamWriter escritor = new StreamWriter(CAMINHO + "tarefa1.csv", false, Encoding.UTF8);
+            StreamWriter escritor = new StreamWriter(CAMINHO + RESULTADO, false, Encoding.Default);
+            string linha;
+            
             escritor.WriteLine(_cabeçalho);
 
-            for (int i = 0; i < cidade.Count; i++)
+            for (int i=0; i<alvo.Length; i++)
             {
-                linha = cidade.ToArray()[i] + SEPARADOR + " " + resultado.ToArray()[i];
+                linha = alvo[i].cidade + SEPARADOR + " " + alvo[i].população;
                 escritor.WriteLine(linha);
             }
 
